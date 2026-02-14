@@ -1,5 +1,30 @@
 import { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
+import { useOutletContext } from "react-router";
+import styled from "styled-components";
+import Icon from "@mdi/react";
+import { mdiHeart, mdiHeartOutline } from "@mdi/js";
+
+// to include the add to cart button
+const StyledDiv = styled.div`
+  // width: 300px;
+  // width: 100%;
+`;
+
+const Body = styled.div`
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2px;
+  margin-top: 15px;
+  justify-items: center;
+  align-items: center;
+  text-align: center;
+`;
+
+const StyledIcon = styled(Icon)`
+  color: red;
+`;
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -27,6 +52,9 @@ const Products = () => {
     fetchData();
   }, []);
 
+  const { addToCart, addToWishlist, removeFromWishlist, isInWishlist } =
+    useOutletContext();
+
   if (loading) {
     return <p>Loading Products...</p>;
   }
@@ -35,16 +63,30 @@ const Products = () => {
     return <p>Error: {error}</p>;
   }
 
-  console.log(products);
-
   return (
     <div>
       <h1>Products</h1>
-      <ul>
+      <Body>
         {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <StyledDiv key={product.id}>
+            <ProductCard key={product.id} product={product} />
+            <button
+              onClick={() =>
+                isInWishlist(product.id)
+                  ? removeFromWishlist(product.id)
+                  : addToWishlist(product)
+              }
+            >
+              {isInWishlist(product.id) ? (
+                <StyledIcon path={mdiHeart} size={1} />
+              ) : (
+                <StyledIcon path={mdiHeartOutline} size={1} />
+              )}
+            </button>
+            <button onClick={() => addToCart(product)}>Add to Cart</button>
+          </StyledDiv>
         ))}
-      </ul>
+      </Body>
     </div>
   );
 };

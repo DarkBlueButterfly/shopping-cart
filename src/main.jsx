@@ -8,6 +8,8 @@ import Products from "./pages/Products.jsx";
 import Item from "./pages/Item.jsx";
 import Cart from "./pages/Cart.jsx";
 import Home from "./pages/Home.jsx";
+import Wishlist from "./pages/Wishlist.jsx";
+import Checkout from "./pages/Checkout.jsx";
 
 const router = createBrowserRouter([
   {
@@ -16,9 +18,10 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "/products", element: <Products /> },
-      { path: "/products/:productId", element: <Item /> }, // lead to specific product page
+      { path: "/products/:productId", element: <Item /> },
       { path: "cart", element: <Cart /> },
-      // add wishlist path
+      { path: "wishlist", element: <Wishlist /> },
+      { path: "checkout", element: <Checkout /> },
     ],
     errorElement: <ErrorPage />,
   },

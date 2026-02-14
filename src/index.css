@@ -4,8 +4,6 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  /* color: rgba(255, 255, 255, 0.87); */
-  /* background-color: #242424; */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,53 +13,31 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    /* color: rgba(255, 255, 255, 0.87); */
-    /* background-color: #242424; */
     --text: rgba(255, 255, 255, 0.87);
     --bg: #242424;
 
     --hoverColor: #535bf2;
     --btnBg: #1a1a1a;
   }
-  a:hover {
-    /* color: #535bf2; */
-  }
-  button {
-    /* background-color: #1a1a1a; */
-    /* --btnBg: #1a1a1a; */
-  }
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    /* color: #213547; */
-    /* background-color: #ffffff; */
     --text: #213547;
     --bg: #ffffff;
 
     --hoverColor: #747bff;
     --btnBg: #f9f9f9;
   }
-  a:hover {
-    /* color: #747bff; */
-  }
-  button {
-    /* background-color: #f9f9f9; */
-    /* --btnBg: #f9f9f9; */
-  }
 }
 
 [data-theme="dark"] {
-  /* color: rgba(255, 255, 255, 0.87); */
-  /* background-color: #242424; */
   --text: rgba(255, 255, 255, 0.87);
   --bg: #242424;
   --btnBg: #1a1a1a;
 }
 
 [data-theme="light"] {
-  /* color: #213547; */
-  /* background-color: #ffffff; */
   --text: #213547;
   --bg: #ffffff;
   --btnBg: #f9f9f9;
@@ -80,16 +56,11 @@ a {
   text-decoration: inherit;
 }
 a:hover {
-  /* color: #535bf2; */
   color: var(--hoverColor);
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
 
   color: var(--text);
   background-color: var(--bg);
@@ -107,7 +78,6 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  /* background-color: #1a1a1a; */
   color: var(--text);
   background-color: var(--btnBg);
   cursor: pointer;
