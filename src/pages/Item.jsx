@@ -8,6 +8,17 @@ const StyledIcon = styled(Icon)`
   color: red;
 `;
 
+const StyledDiv = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const QuantityDiv = styled.div`
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+`;
+
 const Item = () => {
   const { productId } = useParams();
 
@@ -15,8 +26,14 @@ const Item = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const { addToCart, addToWishlist, removeFromWishlist, isInWishlist } =
-    useOutletContext();
+  const {
+    isInCart,
+    addToCart,
+    decreaseQty,
+    addToWishlist,
+    removeFromWishlist,
+    isInWishlist,
+  } = useOutletContext();
 
   useEffect(() => {
     fetch(`https://fakestoreapi.com/products/${productId}`)
@@ -50,20 +67,30 @@ const Item = () => {
           <h3>Description</h3>
           <p>{product.description}</p>
           <h3>${product.price.toFixed(2)}</h3>
-          <button onClick={() => addToCart(product)}>Add to Cart</button>
-          <button
-            onClick={() => {
-              isInWishlist(product.id)
-                ? removeFromWishlist(product.id)
-                : addToWishlist(product);
-            }}
-          >
-            {isInWishlist(product.id) ? (
-              <StyledIcon path={mdiHeart} size={1} />
+          <StyledDiv>
+            <button
+              onClick={() => {
+                isInWishlist(product.id)
+                  ? removeFromWishlist(product.id)
+                  : addToWishlist(product);
+              }}
+            >
+              {isInWishlist(product.id) ? (
+                <StyledIcon path={mdiHeart} size={1} />
+              ) : (
+                <StyledIcon path={mdiHeartOutline} size={1} />
+              )}
+            </button>
+            {isInCart(product.id) ? (
+              <QuantityDiv>
+                <button onClick={() => decreaseQty(product.id)}>-</button>
+                <p>Qty: {isInCart(product.id).quantity}</p>
+                <button onClick={() => addToCart(product)}>+</button>
+              </QuantityDiv>
             ) : (
-              <StyledIcon path={mdiHeartOutline} size={1} />
+              <button onClick={() => addToCart(product)}>Add to Cart</button>
             )}
-          </button>
+          </StyledDiv>
         </div>
       </div>
     </div>

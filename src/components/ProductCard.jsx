@@ -9,13 +9,23 @@ const StyledImg = styled.img`
   width: 250px;
 `;
 
+const StyledText = styled.div`
+  color: blueviolet;
+`;
+
 const ProductCard = ({ product }) => {
   return (
     <StyledDiv>
-      <Link to={`/products/${product.id}`} className="product-card">
+      <Link
+        to={`/products/${product.id}`}
+        className="product-card"
+        title={product.title}
+      >
         <StyledImg src={product.image} alt={product.title} />
-        <h3>{product.title}</h3>
-        <p>${product.price.toFixed(2)}</p>
+        <StyledText>
+          <h3>{product.title}</h3>
+          <p>${product.price.toFixed(2)}</p>
+        </StyledText>
       </Link>
     </StyledDiv>
   );

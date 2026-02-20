@@ -4,16 +4,12 @@ import Icon from "@mdi/react";
 import { mdiTrashCanOutline } from "@mdi/js";
 
 const StyledCard = styled.div`
-  // display: flex;
-  // align-items: center;
-  // justify-content: center;
   gap: 5px;
   margin-bottom: 20px;
   display: grid;
   grid-auto-flow: column;
   justify-items: center;
   align-items: center;
-  // justify-content: space-between;
   grid-template-columns: 1fr 4fr 1fr;
 `;
 
@@ -26,7 +22,6 @@ const StyledLink = styled(Link)`
 // same as Cart
 const StyledImg = styled.img`
   width: 136px;
-  // height: 136px; // too squished
 `;
 
 const Wishlist = () => {

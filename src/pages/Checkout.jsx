@@ -6,6 +6,7 @@ const Checkout = () => {
         Oops! Sorry this store isn't real, so these products cannot be
         purchased...
       </h2>
+      <h2>Thank you for stopping by!</h2>
     </>
   );
 };

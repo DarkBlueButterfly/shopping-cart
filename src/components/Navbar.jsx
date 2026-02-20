@@ -81,12 +81,14 @@ const Navbar = ({ cartItems, wishlistItems }) => {
 
   return (
     <StyledNav>
-      <StyledNavLink style={{ marginLeft: "15px" }} to="/">
+      <StyledNavLink style={{ marginLeft: "15px" }} to="/" title="Go to Home">
         Home
       </StyledNavLink>
       <StyledDiv>
-        <StyledNavLink to="products">Products</StyledNavLink>
-        <StyledNavLink to="wishlist">
+        <StyledNavLink to="products" title="Go to Products">
+          Products
+        </StyledNavLink>
+        <StyledNavLink to="wishlist" title="Go to Wishlist">
           Wishlist
           {wishlistItems.length > 0 ? (
             <HeartBadge>
@@ -98,7 +100,7 @@ const Navbar = ({ cartItems, wishlistItems }) => {
             </HeartBadge>
           )}
         </StyledNavLink>
-        <StyledNavLink to="/cart">
+        <StyledNavLink to="/cart" title="Go to Cart">
           <CartBadge>{itemTotal}</CartBadge>
           <Icon path={mdiCartOutline} title="Go to Cart" />
         </StyledNavLink>

@@ -5,10 +5,9 @@ import styled from "styled-components";
 import Icon from "@mdi/react";
 import { mdiHeart, mdiHeartOutline } from "@mdi/js";
 
-// to include the add to cart button
 const StyledDiv = styled.div`
-  // width: 300px;
-  // width: 100%;
+  display: flex;
+  justify-content: center;
 `;
 
 const Body = styled.div`
@@ -24,6 +23,12 @@ const Body = styled.div`
 
 const StyledIcon = styled(Icon)`
   color: red;
+`;
+
+const QuantityDiv = styled.div`
+  display: flex;
+  gap: 8px;
+  justify-content: center;
 `;
 
 const Products = () => {
@@ -52,8 +57,14 @@ const Products = () => {
     fetchData();
   }, []);
 
-  const { addToCart, addToWishlist, removeFromWishlist, isInWishlist } =
-    useOutletContext();
+  const {
+    isInCart,
+    addToCart,
+    decreaseQty,
+    addToWishlist,
+    removeFromWishlist,
+    isInWishlist,
+  } = useOutletContext();
 
   if (loading) {
     return <p>Loading Products...</p>;
@@ -68,23 +79,33 @@ const Products = () => {
       <h1>Products</h1>
       <Body>
         {products.map((product) => (
-          <StyledDiv key={product.id}>
+          <div key={product.id}>
             <ProductCard key={product.id} product={product} />
-            <button
-              onClick={() =>
-                isInWishlist(product.id)
-                  ? removeFromWishlist(product.id)
-                  : addToWishlist(product)
-              }
-            >
-              {isInWishlist(product.id) ? (
-                <StyledIcon path={mdiHeart} size={1} />
+            <StyledDiv>
+              <button
+                onClick={() =>
+                  isInWishlist(product.id)
+                    ? removeFromWishlist(product.id)
+                    : addToWishlist(product)
+                }
+              >
+                {isInWishlist(product.id) ? (
+                  <StyledIcon path={mdiHeart} size={1} />
+                ) : (
+                  <StyledIcon path={mdiHeartOutline} size={1} />
+                )}
+              </button>
+              {isInCart(product.id) ? (
+                <QuantityDiv>
+                  <button onClick={() => decreaseQty(product.id)}>-</button>
+                  <p>Qty: {isInCart(product.id).quantity}</p>
+                  <button onClick={() => addToCart(product)}>+</button>
+                </QuantityDiv>
               ) : (
-                <StyledIcon path={mdiHeartOutline} size={1} />
+                <button onClick={() => addToCart(product)}>Add to Cart</button>
               )}
-            </button>
-            <button onClick={() => addToCart(product)}>Add to Cart</button>
-          </StyledDiv>
+            </StyledDiv>
+          </div>
         ))}
       </Body>
     </div>
