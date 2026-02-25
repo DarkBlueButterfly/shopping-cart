@@ -69,6 +69,11 @@ const Item = () => {
           <h3>${product.price.toFixed(2)}</h3>
           <StyledDiv>
             <button
+              title={
+                isInWishlist(product.id)
+                  ? "Remove from wishlist"
+                  : "Add to wishlist"
+              }
               onClick={() => {
                 isInWishlist(product.id)
                   ? removeFromWishlist(product.id)
@@ -83,9 +88,23 @@ const Item = () => {
             </button>
             {isInCart(product.id) ? (
               <QuantityDiv>
-                <button onClick={() => decreaseQty(product.id)}>-</button>
-                <p>Qty: {isInCart(product.id).quantity}</p>
-                <button onClick={() => addToCart(product)}>+</button>
+                <button
+                  title="Decrease amount"
+                  onClick={() => decreaseQty(product.id)}
+                >
+                  -
+                </button>
+                <p
+                  title={`You have ${isInCart(product.id).quantity} in your cart`}
+                >
+                  Qty: {isInCart(product.id).quantity}
+                </p>
+                <button
+                  title="Increase amount"
+                  onClick={() => addToCart(product)}
+                >
+                  +
+                </button>
               </QuantityDiv>
             ) : (
               <button onClick={() => addToCart(product)}>Add to Cart</button>
